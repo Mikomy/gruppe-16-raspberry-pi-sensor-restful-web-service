@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: SWVS HA Microservice Architecture - Measurement Data API
+  title: SWVS HA Raspberry Pi and MQTT - Measurement Data API
   description: API Documentation for Measurement Data (Messdaten)
   version: 1.0.0
 
