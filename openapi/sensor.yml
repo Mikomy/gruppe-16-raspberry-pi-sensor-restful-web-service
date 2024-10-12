@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Sensor Management Service
-  description: This sevice mananges sensr metadata like names and locations.
+  description: This sevice mananges sensor metadata like names and locations.
   version: 1.0.0
 tags:
   - name: sensors
@@ -72,7 +72,7 @@ paths:
         '400':
           description: Invalid input data.
 
-# GET /sensor/{sensorId}: Retrieve a specific sensor by ID.components:
+# GET /sensor/{sensorId}: Retrieve a specific sensor by ID.
   /sensors/{sensorId}:
     get:
       tags:
@@ -196,32 +196,17 @@ paths:
                 type: array # Returns an array of measurement objects
                 items:
                   type: object
-                  properties:
-                    measurementId:
-                      type: integer
-                      description: Unique ID of the measurement.
-                      example: 11
-                      sensorID:
-                        type: integer
-                        description: Sensor ID.
-                        example: 1
-                      timestamp:
-                        type: string
-                        format: date-time
-                        description: Time of the measurement.
-                        example: "2024-10-11T10:20:30Z"
-                      temperature:
-                        type: number
-                        format: float
-                        description: Temperature value in Celsius.
-                        example: 21.5
-                      humidity:
-                        type: number
-                        format: float
-                        description: Humidity percentage.
-                        example: 56.5
-                      '404':
-                        description: Measurement not found.
+                  example:
+                    - measurementId: 0
+                      sensorEntity:
+                        sensorId: 0
+                        name: "Temperature Sensor"
+                        location: "Kitchen"
+                      timestamp: "2024-10-12T21:07:01.269Z"
+                      temperature: 21.5
+                      humidity: 56.5
+        '404':
+          description: Measurement not found.
 
 
 
