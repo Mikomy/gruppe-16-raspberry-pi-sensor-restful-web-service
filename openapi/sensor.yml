@@ -7,4 +7,72 @@ tags:
   - name: sensors
     description: API for managing sensors.
 paths:
+  # GET /sensors: Retrieve all sensors
   /sensors:
+    get:
+      tags:
+        - sensors
+      summary: Get all sensors.
+      description: Fetches all recorded sensors from the database.
+      operationId: getAllSensors
+      responses:
+        '200':
+          description: All sensors retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array # Returns an array of sensor objects
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique ID of the sensor.
+                      example: 1
+                    name:
+                      type: string
+                      description: Name of the sensor.
+                      example: Temperature Sensor
+                    location:
+                      type: string
+                      description: Location of the sensor.
+                      example: "Kitchen"
+        '404':
+          description: No sensors found.
+
+    post:
+      tags:
+        - sensors
+      summary: Add a new sensor.
+      description: Add a new sensor record in the database.
+      operationId: addSensor
+      requestBody:
+        description: The sensor data to add.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: integer
+                  description: Unique ID of the sensor.
+                  example: 1
+                name:
+                  type: string
+                  description: Name of the sensor.
+                  example: Temperature Sensor
+                location:
+                  type: string
+                  description: Location of the sensor.
+                  example: "Kitchen"
+      responses:
+        '201':
+          description: Sensor created successfully.
+        '400':
+          description: Invalid input data.
+
+
+
+
+
