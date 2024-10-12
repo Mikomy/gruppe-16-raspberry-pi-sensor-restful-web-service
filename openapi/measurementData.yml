@@ -14,13 +14,13 @@ tags:
     description: Measurement Data operations.
 
 #GET /measurements :To retrive all stored measurement data from the database
-path:
+paths:
   /measurements:
     get:
       tags:
         - measurements
       summary: Get all Measurements
-      description: Fetches all recorded measurements from te database.
+      description: Fetches all recorded measurements from the database.
       operationId: getAllMeasurements
       responses:
         '200':
@@ -83,7 +83,7 @@ path:
                   format: date-time
                   description: Time of the measurement.
                   example: "2024-10-11T10:20:30Z"
-                temperatuere:
+                temperature:
                   type: number
                   format: float
                   description: Temperature value in Celsius.
@@ -102,7 +102,7 @@ path:
   /measurements/{measurementId}:
     get:
       tags:
-        - Measurements
+        - measurements
       summary: Get a specific measurement
       description: Fetches a specific measurement by its ID from the in-memory database.
       operationId: getMeasurementById
@@ -113,9 +113,9 @@ path:
           required: true
           schema:
             type: integer
-          examples: 1
-      response:
-        '201':
+          example: 1
+      responses:
+        '200':
           description: Measurement retrieved successfully.
           content:
             application/json:
@@ -153,7 +153,7 @@ path:
 
     put:
       tags:
-        - Measurements
+        - measurements
       summary: Update an existing measurement
       description: Updates a specific measurement by its ID in the in-memory database.
       operationId: updateMeasurementById
@@ -164,7 +164,7 @@ path:
           required: true
           schema:
             type: integer
-          examples: 1
+          example: 1
       requestBody:
         description: The new measurement data to update the existing one.
         required: true
@@ -187,11 +187,11 @@ path:
                   format: float
                   description: Temperature value in Celsius.
                   example: 21.5
-                  humidity:
-                    type: number
-                    format: float
-                    description: Humidity percentage.
-                    example: 56.5
+                humidity:
+                  type: number
+                  format: float
+                  description: Humidity percentage.
+                  example: 56.5
 
       responses:
         '200':
@@ -203,7 +203,7 @@ path:
 
     delete:
       tags:
-        - Measurements
+        - measurements
       summary: Delete a measurement
       description: Deletes a specific measurement by its ID from the in-memory database.
       operationId: deleteMeasurementById
@@ -214,7 +214,7 @@ path:
           required: true
           schema:
             type: integer
-          examples: 1
+          example: 1
       responses:
         '204':
           description: Measurement deleted successfully.
