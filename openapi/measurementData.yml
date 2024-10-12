@@ -60,5 +60,41 @@ path:
 
 # POST /measurements: To allow the Raspberry Pi sensor to send new measurement data,
 # which will then be stored in the in-memory database.
+    post:
+      tags:
+        - measurements
+      summary: Add new measurement
+      description: Receives new measurement data from the sensor and stores it in the in-memory database.
+      operationId: addMeasurement
+      requestBody:
+        description: Measurement data received from the sensor.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sensorID:
+                  type: integer
+                  description: Sensor ID.
+                  example: 1
+                timestamp:
+                  type: string
+                  format: date-time
+                  description: Time of the measurement.
+                  example: "2024-10-11T10:20:30Z"
+                temperatuere:
+                  type: number
+                  format: float
+                  description: Temperature value in Celsius.
+                  example: 21.5
+                humidity:
+                  type: number
+                  format: float
+                  description: Humidity percentage.
+                  example: 56.5
+      responses:
+          '201':
+            description: Measurement added successfully.
 
 #Get /measurements/{measurementId}: -To retrive a specific measurement using its ID.
