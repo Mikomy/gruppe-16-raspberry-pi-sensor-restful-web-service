@@ -1,0 +1,10 @@
+openapi: 3.0.3
+info:
+  title: Sensor Management Service
+  description: This sevice mananges sensr metadata like names and locations.
+  version: 1.0.0
+tags:
+  - name: sensors
+    description: API for managing sensors.
+paths:
+  /sensors:
