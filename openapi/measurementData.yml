@@ -198,3 +198,25 @@ path:
           description: Measurement updated successfully.
         '404':
           description: Measurement not found.
+
+# DELETE /measurements/{measurementId}: - To delete a specific measurement using its ID.
+
+    delete:
+      tags:
+        - Measurements
+      summary: Delete a measurement
+      description: Deletes a specific measurement by its ID from the in-memory database.
+      operationId: deleteMeasurementById
+      parameters:
+        - name: measurementId
+          in: path
+          description: ID of the measurement to delete.
+          required: true
+          schema:
+            type: integer
+          examples: 1
+      responses:
+        '204':
+          description: Measurement deleted successfully.
+        '404':
+          description: Measurement not found.
