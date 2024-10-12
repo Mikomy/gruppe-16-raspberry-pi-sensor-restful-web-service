@@ -25,14 +25,14 @@ paths:
                 items:
                   type: object
                   properties:
-                    id:
+                    sensorId:
                       type: integer
                       description: Unique ID of the sensor.
                       example: 1
                     name:
                       type: string
                       description: Name of the sensor.
-                      example: Temperature Sensor
+                      example: "Temperature Sensor"
                     location:
                       type: string
                       description: Location of the sensor.
@@ -54,14 +54,14 @@ paths:
             schema:
               type: object
               properties:
-                id:
+                sensorId:
                   type: integer
                   description: Unique ID of the sensor.
                   example: 1
                 name:
                   type: string
                   description: Name of the sensor.
-                  example: Temperature Sensor
+                  example: "Temperature Sensor"
                 location:
                   type: string
                   description: Location of the sensor.
@@ -72,6 +72,156 @@ paths:
         '400':
           description: Invalid input data.
 
+# GET /sensor/{sensorId}: Retrieve a specific sensor by ID.components:
+  /sensors/{sensorId}:
+    get:
+      tags:
+        - sensors
+      summary: Get a specific sensor by ID.
+      description: Fetches a specific sensor record from the database by its ID.
+      operationId: getSensorById
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID of the sensor to retrieve
+          required: true
+          schema:
+            type: integer
+          example: 11
+      responses:
+            '200':
+              description: Sensor retrieved successfully.
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      sensorId:
+                        type: integer
+                        description: Unique ID of the sensor.
+                        example: 11
+                      name:
+                        type: string
+                        description: Name of the sensor.
+                        example: "Temperature Sensor"
+                      location:
+                        type: string
+                        description: Location of the sensor.
+                        example: "Kitchen"
+            '404':
+              description: Sensor not found.
+    put:
+      tags:
+        - sensors
+      summary: Update a specific existing sensor.
+      description: Updates a specific existing sensor's details by its ID in the database.
+      operationId: updateSensorById
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID of the sensor to update
+          required: true
+          schema:
+            type: integer
+          example: 11
+      requestBody:
+        description: The updated sensor data.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sensorId:
+                  type: integer
+                  description: Unique ID of the sensor.
+                  example: 11
+                name:
+                  type: string
+                  description: Name of the sensor.
+                  example: "Temperature Sensor (Updated)"
+                location:
+                  type: string
+                  description: Location of the sensor.
+                  example: "Kitchen (Updated)"
+      responses:
+        '200':
+          description: Sensor updated successfully.
+        '404':
+          description: Sensor not found.
+        '400':
+          description: Invalid input data.
+
+    delete:
+      tags:
+        - sensors
+      summary: Delete a specific sensor by ID.
+      description: Deletes a specific sensor record from the database by its ID.
+      operationId: deleteSensorById
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID of the sensor to delete
+          required: true
+          schema:
+            type: integer
+          example: 11
+      responses:
+        '204':
+          description: Sensor deleted successfully.
+        '404':
+          description: Sensor not found.
+
+  /sensor/{sensorId}/measurements:
+    get:
+      tags:
+        - sensors
+      summary: Retrieve measurements for a specific sensor.
+      description: Fetches all measurements recorded for a specific sensor from the database.
+      operationId: getSensorMeasurements
+      parameters:
+        - name: sensorId
+          in: path
+          description: ID of the sensor to retrieve measurements for
+          required: true
+          schema:
+            type: integer
+          example: 11
+      responses:
+        '200':
+          description: Measurements retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array # Returns an array of measurement objects
+                items:
+                  type: object
+                  properties:
+                    measurementId:
+                      type: integer
+                      description: Unique ID of the measurement.
+                      example: 11
+                      sensorID:
+                        type: integer
+                        description: Sensor ID.
+                        example: 1
+                      timestamp:
+                        type: string
+                        format: date-time
+                        description: Time of the measurement.
+                        example: "2024-10-11T10:20:30Z"
+                      temperature:
+                        type: number
+                        format: float
+                        description: Temperature value in Celsius.
+                        example: 21.5
+                      humidity:
+                        type: number
+                        format: float
+                        description: Humidity percentage.
+                        example: 56.5
+                      '404':
+                        description: Measurement not found.
 
 
 
