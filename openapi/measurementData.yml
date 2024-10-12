@@ -1,3 +1,8 @@
+# The measured data will be stored in an in-memory database using Java,
+# and the Raspberry Pi sensor will be continuously sending real-time measurement data
+
+
+
 openapi: 3.0.3
 info:
   title: SWVS HA Raspberry Pi and MQTT - Measurement Data API
@@ -8,52 +13,52 @@ tags:
   - name: Measurements
     description: Measurement Data operations.
 
+#GET /measurements :To retrive all stored measurement data from the database
 path:
   /measurements:
     get:
       tags:
         - measurements
-      summary: Get Measurements
+      summary: Get all Measurements
       description: Fetches all recorded measurements from te database.
-      operationId: getMeasurements
-      parameters:
-        - name: measurementId
-          in: path
-          description: The ID of the measurement
-          required: true
-          schema:
-            type: integer
-          example: 1
+      operationId: getAllMeasurements
       responses:
         '200':
-          description: Measurement retrieved successfully.
+          description: All Measurement retrieved successfully.
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                    description: Unique ID of the measurement.
-                    example: 101
-                  sensorID:
-                    type: integer
-                    description: Sensor ID.
-                    example: 1
-                  timestamp:
-                    type: string
-                    format: date-time
-                    description: Time of the measurement.
-                    example: "2024-10-11T10:20:30Z"
-                  temperature:
-                    type: number
-                    format: float
-                    description: Temperature value in Celsius.
-                    example: 22.5
-                  humidity:
-                    type: number
-                    format: float
-                    description: Humidity percentage.
-                    example: 55.5
+                type: array # Returns an array of measurement objects
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique ID of the measurement.
+                      example: 11
+                    sensorID:
+                      type: integer
+                      description: Sensor ID.
+                      example: 1
+                    timestamp:
+                      type: string
+                      format: date-time
+                      description: Time of the measurement.
+                      example: "2024-10-11T10:20:30Z"
+                    temperature:
+                      type: number
+                      format: float
+                      description: Temperature value in Celsius.
+                      example: 21.5
+                    humidity:
+                      type: number
+                      format: float
+                      description: Humidity percentage.
+                      example: 56.5
         '404':
           description: Measurement not found.
+
+# POST /measurements: To allow the Raspberry Pi sensor to send new measurement data,
+# which will then be stored in the in-memory database.
+
+#Get /measurements/{measurementId}: -To retrive a specific measurement using its ID.
