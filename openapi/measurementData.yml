@@ -98,3 +98,52 @@ path:
             description: Measurement added successfully.
 
 #Get /measurements/{measurementId}: -To retrive a specific measurement using its ID.
+
+  /measurements/{measurementId}:
+    get:
+      tags:
+        - Measurements
+      summary: Get a specific measurement
+      description: Fetches a specific measurement by its ID from the in-memory database.
+      operationId: getMeasurementById
+      parameters:
+        - name: measurementId
+          in: path
+          description: ID of the measurement
+          required: true
+          schema:
+            type: integer
+          examples: 1
+      response:
+        '201':
+          description: Measurement retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique ID of the measurement.
+                    example: 11
+                  sensorID:
+                    type: integer
+                    description: Sensor ID.
+                    example: 1
+                  timestamp:
+                    type: string
+                    format: date-time
+                    description: Time of the measurement.
+                    example: "2024-10-11T10:20:30Z"
+                  temperature:
+                    type: number
+                    format: float
+                    description: Temperature value in Celsius.
+                    example: 21.5
+                  humidity:
+                    type: number
+                    format: float
+                    description: Humidity percentage.
+                    example: 56.5
+        '404':
+          description: Measurement not found.
